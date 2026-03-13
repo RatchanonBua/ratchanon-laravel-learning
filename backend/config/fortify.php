@@ -91,7 +91,7 @@ return [
     | these middleware but typically this provided default is preferred.
     |
     */
-    'middleware' => ['web'],
+    'middleware' => ['api'],
 
     /*
     |--------------------------------------------------------------------------
@@ -118,7 +118,7 @@ return [
     | especially true if you're writing a custom single-page application.
     |
     */
-    'views' => true,
+    'views' => false,
 
     /*
     |--------------------------------------------------------------------------
