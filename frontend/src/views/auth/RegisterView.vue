@@ -1,37 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
-import { AxiosError } from "axios";
-import type { FormKitNode } from "@formkit/core";
+// import { reactive } from "vue";
+// import type { RegisterForm } from "@/types";
+import { useAuthStore } from "@/stores/auth";
 
-import axiosInstance from "@/libraries/axios";
-import type { RegisterForm } from "@/types";
-import router from "@/router";
-
-const form = reactive<RegisterForm>({ name: "", email: "", password: "", password_confirmation: "" });
-const errors = reactive({ name: [], email: [], password: [] });
-
-const register = async (payload: RegisterForm, node?: FormKitNode) => {
-  // Set Cookie
-  await axiosInstance.get("/sanctum/csrf-cookie", { baseURL: "http://localhost:8000" });
-  // Clear Errors
-  errors.name = [];
-  errors.email = [];
-  errors.password = [];
-  // Axios Request
-  try {
-    const response = await axiosInstance.post("/register", payload);
-    // console.log(response.data);
-    router.push("/dashboard");
-  } catch (error) {
-    console.error(error);
-    if (error instanceof AxiosError && error.response?.status === 422) {
-      // errors.name = error.response.data.errors.name;
-      // errors.email = error.response.data.errors.email;
-      // errors.password = error.response.data.errors.password;
-      node?.setErrors([], error.response?.data.errors);
-    }
-  }
-};
+// const form = reactive<RegisterForm>({ name: "", email: "", password: "", password_confirmation: "" });
+// const errors = reactive({ name: [], email: [], password: [] });
+const { register } = useAuthStore();
 </script>
 
 <template>
