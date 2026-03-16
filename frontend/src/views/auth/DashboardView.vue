@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import axiosInstance from "@/libraries/axios";
 import { ref } from "vue";
 
-const user = ref({ name: "", email: "" });
+import axiosInstance from "@/libraries/axios";
+import type { User } from "@/types";
+
+const user = ref<User | null>(null);
 
 const getUser = async () => {
   try {
@@ -17,7 +19,7 @@ const getUser = async () => {
 const logout = async () => {
   try {
     const response = await axiosInstance.post("/logout");
-    user.value = { name: "", email: "" };
+    user.value = null;
     console.log(response.data);
   } catch (error) {
     console.error(error);
@@ -28,7 +30,7 @@ getUser();
 </script>
 
 <template>
-  <h1 class="text-3xl text-slate-200">Dashboard</h1>
+  <h1 class="text-3xl text-slate-200 p-4 text-center font-bold">Dashboard</h1>
   <div class="flex items-center justify-between">
     <div class="">
       <p class="text-lg text-slate-200">ยินดีต้อนรับ {{ user?.name }}</p>

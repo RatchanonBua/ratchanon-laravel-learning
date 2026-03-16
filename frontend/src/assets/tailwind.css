@@ -16,3 +16,7 @@
 .font-prompt {
   font-family: "Prompt", sans-serif !important;
 }
+
+.formkit-form .text-white {
+  color: white;
+}

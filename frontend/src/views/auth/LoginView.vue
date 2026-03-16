@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import axiosInstance from "@/libraries/axios";
-import type { FormKitNode } from "@formkit/core";
-import { AxiosError } from "axios";
 import { reactive } from "vue";
+import { AxiosError } from "axios";
+import type { FormKitNode } from "@formkit/core";
 
-interface LoginForm {
-  email: string;
-  password: string;
-}
+import axiosInstance from "@/libraries/axios";
+import type { LoginForm } from "@/types";
+import router from "@/router";
 
 const form = reactive<LoginForm>({ email: "", password: "" });
 const errors = reactive({ email: [], password: [] });
@@ -21,7 +19,8 @@ const login = async (payload: LoginForm, node?: FormKitNode) => {
   // Axios Request
   try {
     const response = await axiosInstance.post("/login", payload);
-    console.log(response.data);
+    // console.log(response.data);
+    router.push("/dashboard");
   } catch (error) {
     console.error(error);
     if (error instanceof AxiosError && error.response?.status === 422) {
@@ -34,12 +33,12 @@ const login = async (payload: LoginForm, node?: FormKitNode) => {
 </script>
 
 <template>
-  <h1 class="text-3xl text-slate-200 p-4 text-center">เข้าสู่ระบบ</h1>
+  <h1 class="text-3xl text-slate-200 p-4 text-center font-bold">เข้าสู่ระบบ</h1>
   <!-- FormKit -->
   <div class="max-w-[24em] mx-auto bg-slate-950 rounded-lg p-4">
     <FormKit type="form" submit-label="เข้าสู่ระบบ" @submit="login">
-      <FormKit type="email" label="ที่อยู่อีเมล" name="email" />
-      <FormKit type="password" label="รหัสผ่าน" name="password" />
+      <FormKit type="email" label="ที่อยู่อีเมล" name="email" :classes="{ input: 'text-white' }" />
+      <FormKit type="password" label="รหัสผ่าน" name="password" :classes="{ input: 'text-white' }" />
     </FormKit>
   </div>
   <!-- Tailwind CSS -->
