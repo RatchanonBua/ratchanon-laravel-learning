@@ -16,6 +16,7 @@ export const useAuthStore = defineStore("auth", () => {
     try {
       const response = await axiosInstance.post("/register", payload);
       // console.log(response.data);
+      await getUser();
       router.push("/dashboard");
     } catch (error) {
       console.error(error);
@@ -56,6 +57,11 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const cleanState = () => {
+    user.value = null;
+    isLoggedIn.value = false;
+  }
+
   const logout = async () => {
     try {
       const response = await axiosInstance.post("/logout");
@@ -68,7 +74,7 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
-  return { user, isLoggedIn, register, login, getUser, logout };
+  return { user, isLoggedIn, register, login, getUser, logout, cleanState };
 }, {
   persist: {
     storage: sessionStorage,

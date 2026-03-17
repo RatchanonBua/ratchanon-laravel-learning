@@ -31,6 +31,16 @@ const router = createRouter({
       component: DashboardView,
       meta: { requiresAuth: true },
     },
+    {
+      path: "/404",
+      name: "404",
+      component: () => import("@/views/404.vue"),
+    },
+    {
+      path: "/500",
+      name: "500",
+      component: () => import("@/views/500.vue"),
+    },
   ],
 });
 

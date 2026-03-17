@@ -6,9 +6,7 @@ import { onMounted } from "vue";
 
 // const user = ref<User | null>(null);
 const auth = useAuthStore();
-onMounted(() => {
-  if (!auth.isLoggedIn) { auth.getUser(); }
-});
+onMounted(() => { auth.getUser(); });
 </script>
 
 <template>
