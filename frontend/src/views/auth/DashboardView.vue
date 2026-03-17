@@ -2,10 +2,13 @@
 // import { ref } from "vue";
 // import type { User } from "@/types";
 import { useAuthStore } from "@/stores/auth";
+import { onMounted } from "vue";
 
 // const user = ref<User | null>(null);
 const auth = useAuthStore();
-auth.getUser();
+onMounted(() => {
+  if (!auth.isLoggedIn) { auth.getUser(); }
+});
 </script>
 
 <template>
