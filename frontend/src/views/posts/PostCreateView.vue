@@ -6,6 +6,7 @@ import axiosInstance from "@/libraries/axios";
 import router from "@/router";
 
 type PostForm = { title: string; body: string };
+
 const createPost = async (payload: PostForm, node?: FormKitNode) => {
   try {
     await axiosInstance.post("/dashboard/posts", payload);
