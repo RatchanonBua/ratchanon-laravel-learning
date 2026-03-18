@@ -11,3 +11,11 @@ Route::get('/user', function (Request $request) {
 Route::get('/users', function (Request $request) {
     return User::all();
 });
+
+Route::get('/', \App\Http\Controllers\Frontend\WelcomeController::class);
+
+Route::get('/posts/{post:slug}', \App\Http\Controllers\Frontend\PostShowController::class);
+
+Route::apiResource('/dashboard/posts', App\Http\Controllers\PostController::class)
+    ->middleware('auth:sanctum')
+    ->except(['create', 'edit']);

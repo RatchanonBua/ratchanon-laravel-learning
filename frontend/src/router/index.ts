@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
 import HomeView from "@/views/HomeView.vue";
 import RegisterView from "@/views/auth/RegisterView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import DashboardView from "@/views/auth/DashboardView.vue";
-import { useAuthStore } from "@/stores/auth";
+import PostIndexView from "@/views/posts/PostIndexView.vue";
+import PostCreateView from "@/views/posts/PostCreateView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +32,18 @@ const router = createRouter({
       path: "/dashboard",
       name: "Dashboard",
       component: DashboardView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/dashboard/posts",
+      name: "PostIndex",
+      component: PostIndexView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/dashboard/posts/create",
+      name: "PostCreate",
+      component: PostCreateView,
       meta: { requiresAuth: true },
     },
     {
