@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { TailwindPagination } from "laravel-vue-pagination";
-import { EyeIcon } from "@heroicons/vue/24/solid";
+import { EyeIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
 
 import axiosInstance from "@/libraries/axios";
 import type { Post } from "@/types";
@@ -19,7 +19,7 @@ onMounted(async () => { await getPostList(); });
 </script>
 
 <template>
-  <div class="flex p-4 justify-end">
+  <div class="flex p-4 justify-end mt-6">
     <RouterLink :to="{ name: 'PostCreate' }">สร้างโพสต์</RouterLink>
   </div>
   <section>
@@ -45,8 +45,11 @@ onMounted(async () => { await getPostList(); });
               <td class="px-6 py-4">{{ post.created }}</td>
               <td class="px-6 py-4">
                 <div class="flex space-x-4">
-                  <RouterLink :to="{ name: 'PostShow', params: { id: post.id } }">
+                  <RouterLink :to="{ name: 'PostShow', params: { slug: post.slug } }">
                     <EyeIcon class="w-5 h-5 text-blue-500 dark:text-blue-400 hover:text-blue-700"></EyeIcon>
+                  </RouterLink>
+                  <RouterLink :to="{ name: 'PostEdit', params: { slug: post.slug } }">
+                    <PencilSquareIcon class="w-5 h-5 text-green-500 dark:text-green-400 hover:text-green-700"></PencilSquareIcon>
                   </RouterLink>
                 </div>
               </td>

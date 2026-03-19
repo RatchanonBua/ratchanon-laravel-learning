@@ -8,6 +8,7 @@ import DashboardView from "@/views/auth/DashboardView.vue";
 import PostIndexView from "@/views/posts/PostIndexView.vue";
 import PostCreateView from "@/views/posts/PostCreateView.vue";
 import PostShowView from "@/views/posts/PostShowView.vue";
+import PostEditView from "@/views/posts/PostEditView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,9 +49,16 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: "/dashboard/posts/:id",
+      path: "/dashboard/posts/:slug",
       name: "PostShow",
       component: PostShowView,
+      meta: { requiresAuth: true },
+      props: true,
+    },
+    {
+      path: "/dashboard/posts/:slug/edit",
+      name: "PostEdit",
+      component: PostEditView,
       meta: { requiresAuth: true },
       props: true,
     },
