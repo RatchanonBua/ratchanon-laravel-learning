@@ -4,8 +4,8 @@ import { AxiosError } from "axios";
 import type { FormKitNode } from "@formkit/core";
 
 import axiosInstance from "@/libraries/axios";
-import type { LoginForm, RegisterForm, User } from "@/types";
 import router from "@/router";
+import type { LoginForm, RegisterForm, User } from "@/types";
 
 export const useAuthStore = defineStore("auth", () => {
   const user = ref<User | null>(null);

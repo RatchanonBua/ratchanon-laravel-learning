@@ -9,13 +9,15 @@ import type { Post } from "@/types";
 type LaravelData = { data: Post[]; links: any; meta: any };
 
 const posts = ref<LaravelData>({ data: [], links: {}, meta: {} });
-const getPostList = async (page = 1) => {
+const getPosts = async (page = 1) => {
   const response = await axiosInstance.get(`/dashboard/posts?page=${page}`);
   posts.value = response.data;
   // console.log(response);
 };
 
-onMounted(async () => { await getPostList(); });
+onMounted(async () => {
+  await getPosts();
+});
 </script>
 
 <template>
@@ -57,9 +59,9 @@ onMounted(async () => { await getPostList(); });
           </template>
         </tbody>
       </table>
-      <div class="pt-4">
-        <TailwindPagination :data="posts" @pagination-change-page="getPostList"></TailwindPagination>
-      </div>
+    </div>
+    <div class="pt-4">
+      <TailwindPagination :data="posts" @pagination-change-page="getPosts"></TailwindPagination>
     </div>
   </section>
 </template>
