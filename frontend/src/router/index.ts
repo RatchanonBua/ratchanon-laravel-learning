@@ -7,6 +7,7 @@ import LoginView from "@/views/auth/LoginView.vue";
 import DashboardView from "@/views/auth/DashboardView.vue";
 import PostIndexView from "@/views/posts/PostIndexView.vue";
 import PostCreateView from "@/views/posts/PostCreateView.vue";
+import PostShowView from "@/views/posts/PostShowView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,13 @@ const router = createRouter({
       name: "PostCreate",
       component: PostCreateView,
       meta: { requiresAuth: true },
+    },
+    {
+      path: "/dashboard/posts/:id",
+      name: "PostShow",
+      component: PostShowView,
+      meta: { requiresAuth: true },
+      props: true,
     },
     {
       path: "/404",

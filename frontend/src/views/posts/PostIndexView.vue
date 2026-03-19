@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { TailwindPagination } from "laravel-vue-pagination";
-import axiosInstance from "@/libraries/axios";
+import { EyeIcon } from "@heroicons/vue/24/solid";
 
-type Post = { id: number; title: string; slug: string; body: string; published: boolean; created: string };
+import axiosInstance from "@/libraries/axios";
+import type { Post } from "@/types";
+
 type LaravelData = { data: Post[]; links: any; meta: any };
 
 const posts = ref<LaravelData>({ data: [], links: {}, meta: {} });
 const getPostList = async (page = 1) => {
   const response = await axiosInstance.get(`/dashboard/posts?page=${page}`);
   posts.value = response.data;
-  console.log(response);
+  // console.log(response);
 };
 
 onMounted(async () => { await getPostList(); });
@@ -41,7 +43,13 @@ onMounted(async () => { await getPostList(); });
               <td class="px-6 py-4">{{ post.slug }}</td>
               <td class="px-6 py-4">{{ post.published }}</td>
               <td class="px-6 py-4">{{ post.created }}</td>
-              <td class="px-6 py-4">Edit/Delete</td>
+              <td class="px-6 py-4">
+                <div class="flex space-x-4">
+                  <RouterLink :to="{ name: 'PostShow', params: { id: post.id } }">
+                    <EyeIcon class="w-5 h-5 text-blue-500 dark:text-blue-400 hover:text-blue-700"></EyeIcon>
+                  </RouterLink>
+                </div>
+              </td>
             </tr>
           </template>
         </tbody>
