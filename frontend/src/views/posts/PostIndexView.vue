@@ -60,7 +60,7 @@ onMounted(async () => {
         </tbody>
       </table>
     </div>
-    <div class="pt-4">
+    <div class="py-4 pagination">
       <TailwindPagination :data="posts" @pagination-change-page="getPosts"></TailwindPagination>
     </div>
   </section>
