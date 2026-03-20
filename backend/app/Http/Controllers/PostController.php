@@ -71,8 +71,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $post->delete();
+        return response(null, 204);
     }
 }

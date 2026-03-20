@@ -41,7 +41,7 @@ export const usePostStore = defineStore("post", () => {
   const createPost = async (payload: PostForm, node?: FormKitNode) => {
     try {
       await axiosInstance.post("/dashboard/posts", payload);
-      await router.push("/dashboard/posts");
+      await router.push(`/dashboard/posts`);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 422) {
         node?.setErrors([], error.response?.data.errors);
@@ -52,7 +52,7 @@ export const usePostStore = defineStore("post", () => {
   const updatePost = async (slug: string, payload: PostForm, node?: FormKitNode) => {
     try {
       await axiosInstance.put(`/dashboard/posts/${slug}`, payload);
-      await router.push("/dashboard/posts");
+      await router.push(`/dashboard/posts`);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 422) {
         node?.setErrors([], error.response?.data.errors);
@@ -60,5 +60,17 @@ export const usePostStore = defineStore("post", () => {
     }
   };
 
-  return { postsCollection, post, isLoading, getPosts, getPost, createPost, updatePost };
+  const deletePost = async (page: number, slug: string) => {
+    isLoading.value = true;
+    try {
+      await axiosInstance.delete(`/dashboard/posts/${slug}`);
+      await getPosts(page);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  return { postsCollection, post, isLoading, getPosts, getPost, createPost, updatePost, deletePost };
 });

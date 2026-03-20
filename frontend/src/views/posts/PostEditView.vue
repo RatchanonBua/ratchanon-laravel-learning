@@ -9,8 +9,8 @@ import type { PostForm } from "@/types";
 const route = useRoute();
 const postStore = usePostStore();
 
-const handleUpdate = (payload: PostForm, node?: FormKitNode) => {
-  postStore.updatePost(String(route.params.slug), payload, node);
+const handleUpdate = async (payload: PostForm, node?: FormKitNode) => {
+  await postStore.updatePost(String(route.params.slug), payload, node);
 };
 
 watch(() => route.params.slug, (slug) => postStore.getPost(String(slug)), { immediate: true });
