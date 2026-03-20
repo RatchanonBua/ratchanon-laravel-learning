@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-prompt;
+  }
+  .formkit-form .text-white {
+    color: white;
+  }
+}
+
+@layer components {
+  .pagination button,
+  .pagination a {
+    @apply px-4 py-2 border text-sm font-medium transition-colors duration-200 relative inline-flex items-center;
+    @apply bg-white text-gray-500 border-gray-300 !important;
+    @apply dark:bg-slate-800 dark:text-slate-400 dark:border-slate-600 !important;
+  }
+  .pagination button.bg-blue-50,
+  .pagination a.bg-blue-50,
+  .pagination button.z-30 {
+    @apply bg-blue-600 text-white border-blue-600 !important;
+    @apply dark:bg-blue-500 dark:text-white dark:border-blue-500 !important;
+    @apply opacity-100 !important;
+    @apply cursor-default;
+  }
+  .pagination button:hover:not(.bg-blue-50):not(:disabled) {
+    @apply bg-gray-50 text-blue-600 border-gray-300 !important;
+    @apply dark:bg-slate-700 dark:text-blue-400 !important;
+  }
+  .pagination button:disabled:not(.bg-blue-50) {
+    @apply opacity-50 cursor-not-allowed bg-gray-50 text-gray-400 !important;
+    @apply dark:bg-slate-900 dark:text-slate-600 !important;
+  }
+}
+
+.font-prompt {
+  font-family: "Prompt", sans-serif !important;
+}
